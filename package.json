@@ -1,0 +1,33 @@
+{
+  "name": "gulp-mvb",
+  "description": "Gulp plugin for creating a minimum viable blog.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "homepage": "https://dennisreimann.de",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dennisreimann/gulp-mvb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dennisreimann/gulp-mvb/issues"
+  },
+  "author": {
+    "name": "Dennis Reimann",
+    "email": "mail@dennisreimann.de",
+    "url": "https://dennisreimann.de/"
+  },
+  "keywords": [
+    "gulpplugin",
+    "blog"
+  ],
+  "dependencies": {
+    "glob": "^6.0.1",
+    "marked": "^0.3.5",
+    "through2": "^2.0.0",
+    "util-extend": "^1.0.1",
+    "yaml-front-matter": "^3.2.3"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  }
+}
