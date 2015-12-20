@@ -11,6 +11,8 @@ It is made up of these parts which are connected to [DoTheSimplestThingThatCould
 * **Jade** for the templates. This is optional and the library is supposed to work with other template languages as well, as long as they support [gulp-data](https://www.npmjs.com/package/gulp-data). I've only tested it with Jade, yet.
 * **Gulp** to wire it together
 
+In fact, this is the [Octopress](http://octopress.org/) way of writing articles, which I really like. As I needed another foundation for building my site and blog, I decided to use this approach and create a gulp-plugin for it.
+
 ## Conventions and assumptions
 
 To keep it dead simple, here are the rules. Articles...
@@ -25,7 +27,9 @@ Install with:
 
     npm install gulp-mvb --save-dev
 
-And use the plugin in your gulp stream:
+### Gulpfile
+
+Use the plugin like this in your gulpfile:
 
 ```javascript
 var mvb = require("gulp-mvb");
@@ -44,7 +48,8 @@ var mvbConf = {
   glob: paths.articles,
   // the template for an article page
   template: paths.articleTemplate,
-  // callback function for generating an article permalink. see docs below for info on properties.
+  // callback function for generating an article permalink.
+  // see docs below for info on the article properties.
   permalink: (article) ->
     "/#{paths.articlesBasepath}/#{article.id}.html"
 }
@@ -65,6 +70,8 @@ gulp.task("feed", function() {
 });
 ```
 
+### The `article` object
+
 The article object has the following properties, which can be used in the template and permalink function:
 
 * `id`: In case this is not set via front matter, it will be inferred from the articles file name (second part after date)
@@ -72,6 +79,75 @@ The article object has the following properties, which can be used in the templa
 * `permalink`: Gets generated via the permalink function
 * `content`: The rendered content (HTML)
 * `fileName`: You might want to use this in the permalink callback function
+
+In addition to these properties, you will also have access to the ones you defined in the article's frontmatter.
+
+### An article/blogpost
+
+This is what a simple article with some frontmatter could look like:
+
+```markdown
+---
+title: Hello World
+subtitle: Additional title
+date: 2015-12-06
+---
+
+Here goes the markdown content that will be rendered as HTML...
+```
+
+### Templates
+
+Your `articleTemplate` might be something like:
+
+```jade
+extends layout
+
+block main
+  article
+    header
+      h1= mvb.article.title
+      - if mvb.article.subtitle
+        h2= mvb.article.subtitle
+    != mvb.article.content
+    footer
+      | Posted on
+      time= mvb.article.date
+```
+
+As you can see the article data will be available in your template via the namespaced variable `mvb.article`. This is to avoid collision of mvbs variables with other potential custom variables.
+
+You can also use the `mvb.articles` list to generate an overview for all your articles or your `feedTemplate` (in this case atom):
+
+```jade
+doctype xml
+feed(xmlns="http://www.w3.org/2005/Atom" xml:base="https://example.org")
+  id https://example.org/atom.xml
+  title Example Atom Feed
+  updated= mvb.articles[0].date.toISOString()
+  link(href="/")
+  link(rel="self" href="/atom.xml")
+  for article in mvb.articles
+    entry
+      id= article.id
+      title= article.title
+      link(href=article.permalink)
+      updated= article.date.toISOString()
+      content(type="html")= article.content
+```
+
+Jade can be used to compile XML as shown above too, but it will always give the resulting file the .html extension, so you will need to rename the feed with [gulp-rename](https://www.npmjs.com/package/gulp-rename).
+
+You can also use the `mvb.articles` list to embed a list of your blogposts in your sites pages:
+
+```jade
+ul
+  for article in mvb.articles
+    li
+      a(href=article.permalink)= article.title
+```
+
+To have access to the mvb variables you will need to use `.pipe(mvb(mvbConf))` in your gulp stream before rendering the templates.
 
 ## License
 
