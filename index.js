@@ -75,8 +75,8 @@ module.exports = (function() {
     // function to create article permalinks
     var permalink = options.permalink;
 
-    // read articles only once and cache them
-    var articles = loadArticles(globs, permalink);
+    // read articles only once, reverse and cache them
+    var articles = loadArticles(globs, permalink).reverse();
 
     // map article filenames to its object for lookup in stream
     var map = articles.reduce(function(mapped, article) {
