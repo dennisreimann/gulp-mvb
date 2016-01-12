@@ -79,6 +79,8 @@ The article object has the following properties, which can be used in the templa
 * `permalink`: Gets generated via the permalink function
 * `content`: The rendered content (HTML)
 * `fileName`: You might want to use this in the permalink callback function
+* `previousArticle`: The previous/earlier article
+* `nextArticle`: The next/later article
 
 In addition to these properties, you will also have access to the ones you defined in the article's frontmatter.
 

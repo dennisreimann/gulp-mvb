@@ -23,9 +23,19 @@ module.exports = (function() {
 
   var loadArticles = function(globs, permalink) {
     var files = findArticles(globs);
+    var prevArticle;
 
     return files.map(function(file) {
-      return loadArticle(file, permalink);
+      var article = loadArticle(file, permalink);
+
+      // mark previous and next articles
+      if (prevArticle) {
+        prevArticle.nextArticle = article;
+      }
+      article.previousArticle = prevArticle;
+      prevArticle = article;
+
+      return article;
     });
   };
 
