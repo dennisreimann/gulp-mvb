@@ -50,8 +50,9 @@ var mvbConf = {
   template: paths.articleTemplate,
   // callback function for generating an article permalink.
   // see docs below for info on the article properties.
-  permalink: (article) ->
-    "/#{paths.articlesBasepath}/#{article.id}.html"
+  permalink: function (article) {
+    "/" + paths.articlesBasepath + "/" + article.id + ".html";
+  },
   // callback function for generating custom article groups.
   // access the return value via the groupedArticles property, so that you can
   // either return an array if you only have one group or return an object with
