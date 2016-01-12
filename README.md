@@ -52,6 +52,21 @@ var mvbConf = {
   // see docs below for info on the article properties.
   permalink: (article) ->
     "/#{paths.articlesBasepath}/#{article.id}.html"
+  // callback function for generating custom article groups.
+  // access the return value via the groupedArticles property, so that you can
+  // either return an array if you only have one group or return an object with
+  // named groups in case you want to use multiple groups (by date, by tag, ...)
+  grouping: function(articles) {
+    var byYear = {};
+    articles.forEach(function(article) {
+      var year = article.date.toISOString().replace(/-.*/, "");
+      byYear[year] || (byYear[year] = []);
+      return byYear[year].push(article);
+    });
+    return {
+      byYear: articlesByYear
+    };
+  }
 }
 
 gulp.task("articles", function() {
@@ -148,6 +163,8 @@ ul
     li
       a(href=article.permalink)= article.title
 ```
+
+In case you defined a `grouping` callback in your config, you can access the grouped articles via the `mvb.groupedArticles` property.
 
 To have access to the mvb variables you will need to use `.pipe(mvb(mvbConf))` in your gulp stream before rendering the templates.
 

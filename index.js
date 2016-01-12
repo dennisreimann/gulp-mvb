@@ -75,6 +75,9 @@ module.exports = (function() {
     // function to create article permalinks
     var permalink = options.permalink;
 
+    // function to group articles
+    var grouping = options.grouping;
+
     // read articles only once, reverse and cache them
     var articles = loadArticles(globs, permalink).reverse();
 
@@ -84,6 +87,12 @@ module.exports = (function() {
       return mapped;
     }, {});
 
+    // grouping
+    var groupedArticles;
+    if (typeof(grouping) === "function") {
+      groupedArticles = grouping(articles);
+    }
+
     return Through.obj(function(file, unused, callback) {
       // lookup article by its file name
       var article = map[path.basename(file.path)];
@@ -91,7 +100,10 @@ module.exports = (function() {
       // assign articles data to the file object so that it will be
       // available in the template during rendering.
       if (!file.data) { file.data = {}; }
-      file.data.mvb = { articles: articles };
+      file.data.mvb = {
+        articles: articles,
+        groupedArticles: groupedArticles
+      };
 
       if (article) {
         // assign article data
