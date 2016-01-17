@@ -35,6 +35,7 @@ Use the plugin like this in your gulpfile:
 var mvb = require("gulp-mvb");
 var jade = require("gulp-jade");
 var rename = require("gulp-rename");
+var highlightjs = require("highlight.js");
 
 var paths = {
   articles: ["src/articles/**/*.md"],
@@ -50,8 +51,11 @@ var mvbConf = {
   template: paths.articleTemplate,
   // callback function for generating an article permalink.
   // see docs below for info on the article properties.
-  permalink: function (article) {
-    "/" + paths.articlesBasepath + "/" + article.id + ".html";
+  permalink: function(article) {
+    return "/" + paths.articlesBasepath + "/" + article.id + ".html";
+  },
+  highlight: function(code) {
+    return highlightjs.highlightAuto(code).value;
   },
   // callback function for generating custom article groups.
   // access the return value via the groupedArticles property, so that you can

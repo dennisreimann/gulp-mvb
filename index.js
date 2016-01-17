@@ -78,6 +78,9 @@ module.exports = (function() {
     // function to group articles
     var grouping = options.grouping;
 
+    // function to highlight code blocks
+    var highlight = options.highlight;
+
     // read articles only once, reverse and cache them
     var articles = loadArticles(globs, permalink).reverse();
 
@@ -91,6 +94,11 @@ module.exports = (function() {
     var groupedArticles;
     if (typeof(grouping) === "function") {
       groupedArticles = grouping(articles);
+    }
+
+    // highlighting
+    if (typeof(highlight) === "function") {
+      marked.setOptions({ highlight: highlight });
     }
 
     return Through.obj(function(file, unused, callback) {
