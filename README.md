@@ -101,6 +101,7 @@ The article object has the following properties, which can be used in the templa
 * `fileName`: You might want to use this in the permalink callback function
 * `previousArticle`: The previous/earlier article
 * `nextArticle`: The next/later article
+* `description`: If you use the Wordpress style `<!-- more -->` marker in your content, the description will be set with the text up to the marker. The marker will get replaced with `<div id="more"></div>` so you can link to it by appending the `#more` hash to the permalink.
 
 In addition to these properties, you will also have access to the ones you defined in the article's frontmatter.
 

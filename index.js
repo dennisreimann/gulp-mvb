@@ -56,6 +56,20 @@ module.exports = (function() {
     article.content = marked(article.__content);
     delete article.__content;
 
+    // check for more marker and infer description
+    var more = /<!-- more -->/i;
+    var desc = article.content.match(more);
+    if (desc && desc.index) {
+      article.content = article.content.replace(more, '<div id="more"></div>');
+
+      if (!article.description) {
+        article.description = desc.input
+          .substring(0, desc.index)
+          .replace(/(<([^>]+)>)/ig, "")
+          .trim();
+      }
+    }
+
     return article;
   };
 
