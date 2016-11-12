@@ -7,10 +7,11 @@ var extend = require('util-extend');
 var marked = require('marked');
 var Through = require('through2');
 var yamlFront = require('yaml-front-matter');
+var PluginError = require('gulp-util').PluginError;
 
 module.exports = (function() {
   var err = function(message) {
-    throw new PluginError('gulp-mvb', message);
+    throw new PluginError('gulp-mvb', message, false);
   };
 
   // takes an array of globs or a single glob as a string
