@@ -22,12 +22,12 @@ module.exports = (function() {
     }, []);
   };
 
-  var loadArticles = function(globs, permalink) {
+  var loadArticles = function(globs, permalink, loaded) {
     var files = findArticles(globs);
     var prevArticle;
 
     return files.map(function(file) {
-      var article = loadArticle(file, permalink);
+      var article = loadArticle(file, permalink, loaded);
 
       // mark previous and next articles
       if (prevArticle) {
@@ -42,7 +42,7 @@ module.exports = (function() {
 
   // loads an article by its file path and returns an object
   // with the rendered markdown and the article meta data.
-  var loadArticle = function(filePath, permalink) {
+  var loadArticle = function(filePath, permalink, loaded) {
     var input = fs.readFileSync(filePath);
     var article = yamlFront.loadFront(input);
     var fileName = path.basename(filePath);
@@ -71,6 +71,10 @@ module.exports = (function() {
       }
     }
 
+    if (loaded) {
+      loaded(article)
+    }
+
     return article;
   };
 
@@ -78,6 +82,7 @@ module.exports = (function() {
   return function(options) {
     if (!options.glob) { err('Missing glob option') }
     if (!options.template) { err('Missing template option'); }
+    if (typeof(options.loaded) != "function") { err('Missing loaded function'); }
     if (typeof(options.permalink) != "function") { err('Missing permalink function'); }
 
     // ensure globs is an array
@@ -96,8 +101,11 @@ module.exports = (function() {
     // function to highlight code blocks
     var highlight = options.highlight;
 
+    // function to modify article data
+    var loaded = options.loaded;
+
     // read articles only once, reverse and cache them
-    var articles = loadArticles(globs, permalink).reverse();
+    var articles = loadArticles(globs, permalink, loaded).reverse();
 
     // map article filenames to its object for lookup in stream
     var map = articles.reduce(function(mapped, article) {

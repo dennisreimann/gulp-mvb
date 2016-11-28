@@ -54,6 +54,10 @@ var mvbConf = {
   permalink: function(article) {
     return "/" + paths.articlesBasepath + "/" + article.id + ".html";
   },
+  // callback function to further modify an article after it has been loaded.
+  loaded: function(article) {
+    article.calculatedData = doSomething();
+  },
   highlight: function(code) {
     return highlightjs.highlightAuto(code).value;
   },
@@ -103,7 +107,7 @@ The article object has the following properties, which can be used in the templa
 * `nextArticle`: The next/later article
 * `description`: If you use the Wordpress style `<!-- more -->` marker in your content, the description will be set with the text up to the marker. The marker will get replaced with `<div id="more"></div>` so you can link to it by appending the `#more` hash to the permalink.
 
-In addition to these properties, you will also have access to the ones you defined in the article's frontmatter.
+In addition to these properties, you will also have access to the ones you defined in the article's frontmatter. To append further data, you can use the `loaded` callback function.
 
 ### An article/blogpost
 
