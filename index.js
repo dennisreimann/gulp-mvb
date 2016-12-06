@@ -82,8 +82,8 @@ module.exports = (function() {
   return function(options) {
     if (!options.glob) { err('Missing glob option') }
     if (!options.template) { err('Missing template option'); }
-    if (typeof(options.loaded) != "function") { err('Missing loaded function'); }
     if (typeof(options.permalink) != "function") { err('Missing permalink function'); }
+    if (options.loaded && typeof(options.loaded) != "function") { err('Loaded must be a function'); }
 
     // ensure globs is an array
     if (!Array.isArray(options.glob)) options.glob = [options.glob];
