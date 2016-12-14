@@ -6,26 +6,32 @@ gulp-mvb is a [gulp](https://github.com/wearefractal/gulp) plugin for creating a
 
 It is made up of these parts which are connected to [DoTheSimplestThingThatCouldPossiblyWork](http://c2.com/xp/DoTheSimplestThingThatCouldPossiblyWork.html)(TM):
 
-* **Markdown** for writing the articles
-* **YAML Front Matter** for the article meta information
-* **Jade** for the templates. This is optional and the library is supposed to work with other template languages as well, as long as they support [gulp-data](https://www.npmjs.com/package/gulp-data). I've only tested it with Jade, yet.
-* **Gulp** to wire it together
+- **Markdown** for writing the articles
+- **YAML Front Matter** for the article meta information
+- **Jade** for the templates.
+  This is optional and the library is supposed to work with other template languages as well, as long as they support [gulp-data](https://www.npmjs.com/package/gulp-data).
+  I've only tested it with Jade, yet.
+- **Gulp** to wire it together
 
-In fact, this is the [Octopress](http://octopress.org/) way of writing articles, which I really like. As I needed another foundation for building my site and blog, I decided to use this approach and create a gulp-plugin for it.
+In fact, this is the [Octopress](http://octopress.org/) way of writing articles, which I really like.
+As I needed another foundation for building [my site and blog](https://github.com/dennisreimann/website/), I decided to use this approach and create a gulp-plugin for it.
 
 ## Conventions and assumptions
 
-To keep it dead simple, here are the rules. Articles...
+To keep it dead simple, here are the rules.
+Articles...
 
-* are written in Markdown
-* have this filename pattern: `YYYY-MM-DD-ARTICLE_NAME.md`
-* meta data is defined via YAML Front Matter
+- are written in Markdown
+- have this filename pattern: `YYYY-MM-DD-ARTICLE_NAME.md`
+- meta data is defined via YAML Front Matter
 
 ## Usage
 
 Install with:
 
-    npm install gulp-mvb --save-dev
+```bash
+npm install gulp-mvb --save-dev
+```
 
 ### Example
 
@@ -85,7 +91,7 @@ gulp.task('articles', () =>
   gulp.src(paths.articles)
     .pipe(mvb(mvbConf))
     .pipe(jade())
-    .pipe(gulp.dest(paths.articlesBasepath));
+    .pipe(gulp.dest(paths.articlesBasepath))
 );
 
 gulp.task('feed', () =>
@@ -93,7 +99,7 @@ gulp.task('feed', () =>
     .pipe(mvb(mvbConf))
     .pipe(jade(pretty: true))
     .pipe(rename('atom.xml'))
-    .pipe(gulp.dest());
+    .pipe(gulp.dest())
 );
 ```
 
@@ -103,16 +109,17 @@ See all of this in a broader context in [my websites gulpfile](https://github.co
 
 The article object has the following properties, which can be used in the template and permalink function:
 
-* `id`: In case this is not set via front matter, it will be inferred from the articles file name (second part after date)
-* `date`: In case this is not set via front matter, it will be inferred from the articles file name
-* `permalink`: Gets generated via the permalink function
-* `content`: The rendered content (HTML)
-* `fileName`: You might want to use this in the permalink callback function
-* `previousArticle`: The previous/earlier article
-* `nextArticle`: The next/later article
-* `description`: If you use the Wordpress style `<!-- more -->` marker in your content, the description will be set with the text up to the marker. The marker will get replaced with `<div id="more"></div>` so you can link to it by appending the `#more` hash to the permalink.
+- `id`: In case this is not set via front matter, it will be inferred from the articles file name (second part after date)
+- `date`: In case this is not set via front matter, it will be inferred from the articles file name
+- `permalink`: Gets generated via the permalink function
+- `content`: The rendered content (HTML)
+- `fileName`: You might want to use this in the permalink callback function
+- `previousArticle`: The previous/earlier article
+- `nextArticle`: The next/later article
+- `description`: If you use the Wordpress style `<!-- more -->` marker in your content, the description will be set with the text up to the marker. The marker will get replaced with `<div id="more"></div>` so you can link to it by appending the `#more` hash to the permalink.
 
-In addition to these properties, you will also have access to the ones you defined in the article's frontmatter. To append further data, you can use the `loaded` callback function.
+In addition to these properties, you will also have access to the ones you defined in the article's frontmatter.
+To append further data, you can use the `loaded` callback function.
 
 ### An article/blogpost
 
@@ -147,7 +154,8 @@ block main
       time= mvb.article.date
 ```
 
-As you can see the article data will be available in your template via the namespaced variable `mvb.article`. This is to avoid collision of mvbs variables with other potential custom variables.
+As you can see the article data will be available in your template via the namespaced variable `mvb.article`.
+This is to avoid collision of mvbs variables with other potential custom variables.
 
 You can also use the `mvb.articles` list to generate an overview for all your articles or your `feedTemplate` (in this case atom):
 
@@ -168,7 +176,8 @@ feed(xmlns="http://www.w3.org/2005/Atom" xml:base="https://example.org")
       content(type="html")= article.content
 ```
 
-Jade can be used to compile XML as shown above too, but it will always give the resulting file the .html extension, so you will need to rename the feed with [gulp-rename](https://www.npmjs.com/package/gulp-rename).
+Jade can be used to compile XML as shown above too, but it will always give the resulting file the .html extension.
+So you will need to rename the feed with [gulp-rename](https://www.npmjs.com/package/gulp-rename).
 
 You can also use the `mvb.articles` list to embed a list of your blogposts in your sites pages:
 
