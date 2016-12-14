@@ -27,9 +27,13 @@ Install with:
 
     npm install gulp-mvb --save-dev
 
+### Example
+
+For a full featured example of all the things described below see [my websites code](https://github.com/dennisreimann/website/).
+
 ### Gulpfile
 
-Use the plugin like this in your gulpfile:
+Here is the TL;DR for how to use gulp-mvb in your gulpfile:
 
 ```javascript
 import mvb from 'gulp-mvb';
@@ -92,6 +96,8 @@ gulp.task('feed', () =>
     .pipe(gulp.dest());
 );
 ```
+
+See all of this in a broader context in [my websites gulpfile](https://github.com/dennisreimann/website/blob/master/gulpfile.babel.js).
 
 ### The `article` object
 
