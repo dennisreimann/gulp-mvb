@@ -32,66 +32,65 @@ Install with:
 Use the plugin like this in your gulpfile:
 
 ```javascript
-var mvb = require("gulp-mvb");
-var jade = require("gulp-jade");
-var rename = require("gulp-rename");
-var highlightjs = require("highlight.js");
+import mvb from 'gulp-mvb';
+import jade from 'gulp-jade';
+import rename from 'gulp-rename';
+import highlightjs from 'highlight.js';
 
-var paths = {
-  articles: ["src/articles/**/*.md"],
-  feedTemplate: "src/templates/atom.jade",
-  articleTemplate: "src/templates/article.jade",
-  articlesBasepath: "articles"
+const paths = {
+  articles: ['src/articles/**/*.md'],
+  feedTemplate: 'src/templates/atom.jade',
+  articleTemplate: 'src/templates/article.jade',
+  articlesBasepath: 'articles'
 };
 
-var mvbConf = {
+const mvbConf = {
   // glob that locates the article markdown files
   glob: paths.articles,
   // the template for an article page
   template: paths.articleTemplate,
   // callback function for generating an article permalink.
   // see docs below for info on the article properties.
-  permalink: function(article) {
-    return "/" + paths.articlesBasepath + "/" + article.id + ".html";
+  permalink(article) {
+    return `/${paths.articlesBasepath}/${article.id}.html`;
   },
   // callback function to further modify an article after it has been loaded.
-  loaded: function(article) {
+  loaded(article) {
     article.calculatedData = doSomething();
   },
-  highlight: function(code) {
-    return highlightjs.highlightAuto(code).value;
+  highlight(code, lang) {
+    const languages = (lang != null) ? [lang] : undefined;
+    return highlightjs.highlightAuto(code, languages).value;
   },
   // callback function for generating custom article groups.
   // access the return value via the groupedArticles property, so that you can
   // either return an array if you only have one group or return an object with
   // named groups in case you want to use multiple groups (by date, by tag, ...)
-  grouping: function(articles) {
-    var byYear = {};
-    articles.forEach(function(article) {
-      var year = article.date.toISOString().replace(/-.*/, "");
+  grouping(articles) {
+    const byYear = {};
+    articles.forEach((article) => {
+      let year = article.date.toISOString().replace(/-.*/, "");
       byYear[year] || (byYear[year] = []);
       return byYear[year].push(article);
     });
-    return {
-      byYear: articlesByYear
-    };
+    return { byYear };
   }
 }
 
-gulp.task("articles", function() {
+gulp.task('articles', () =>
   gulp.src(paths.articles)
     .pipe(mvb(mvbConf))
     .pipe(jade())
     .pipe(gulp.dest(paths.articlesBasepath));
-});
+);
 
-gulp.task("feed", function() {
+gulp.task('feed', () =>
   gulp.src(paths.feedTemplate)
     .pipe(mvb(mvbConf))
     .pipe(jade(pretty: true))
-    .pipe(rename("atom.xml"))
+    .pipe(rename('atom.xml'))
     .pipe(gulp.dest());
-});
+);
 ```
 
 ### The `article` object
