@@ -29,6 +29,12 @@
     "yaml-front-matter": "^3.2.3"
   },
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 6.11.4"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
   }
 }

@@ -2,6 +2,11 @@
 
 gulp-mvb is a [gulp](https://github.com/wearefractal/gulp) plugin for creating a *minimum viable blog*.
 
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Build Status](https://travis-ci.org/dennisreimann/gulp-mvb.svg?branch=master)](https://travis-ci.org/dennisreimann/gulp-mvb)
+[![npm](https://img.shields.io/npm/v/gulp-mvb.svg)](https://www.npmjs.com/package/gulp-mvb)
+[![npm](https://img.shields.io/npm/dw/gulp-mvb.svg)](https://www.npmjs.com/package/gulp-mvb)
+
 ## Dead simple blogging
 
 It is made up of these parts which are connected to [DoTheSimplestThingThatCouldPossiblyWork](http://c2.com/xp/DoTheSimplestThingThatCouldPossiblyWork.html)(TM):
@@ -31,6 +36,11 @@ Install with:
 
 ```bash
 npm install gulp-mvb --save-dev
+```
+or
+
+```bash
+yarn add --dev gulp-mvb
 ```
 
 ### Example
