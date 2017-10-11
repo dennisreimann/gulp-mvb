@@ -23,7 +23,7 @@
   "dependencies": {
     "glob": "^6.0.1",
     "gulp-util": "^3.0.7",
-    "marked": "^0.3.5",
+    "markdown-it": "^8.4.0",
     "through2": "^2.0.0",
     "util-extend": "^1.0.1",
     "yaml-front-matter": "^3.2.3"

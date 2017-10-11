@@ -2,10 +2,14 @@ const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
 const extend = require('util-extend')
-const marked = require('marked')
 const Through = require('through2')
 const yamlFront = require('yaml-front-matter')
 const PluginError = require('gulp-util').PluginError
+const md = require('markdown-it')({
+  html: true,
+  linkify: true,
+  typographer: true
+})
 
 module.exports = (() => {
   const err = message => {
@@ -52,7 +56,7 @@ module.exports = (() => {
 
     article.fileName = fileName
     article.permalink = permalink(article)
-    article.content = marked(article.__content)
+    article.content = md.render(article.__content)
     delete article.__content
 
     // check for more marker and infer description
@@ -119,7 +123,7 @@ module.exports = (() => {
 
     // highlighting
     if (typeof (highlight) === 'function') {
-      marked.setOptions({ highlight: highlight })
+      md.set({ highlight })
     }
 
     return Through.obj((file, unused, callback) => {
