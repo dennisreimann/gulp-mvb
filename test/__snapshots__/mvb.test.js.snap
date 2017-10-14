@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#loadArticles 1`] = `
+"<p>Hello everyone, I’m starting a new blog!</p>
+<div id=\\"more\\"></div>
+<p>This is the first article.</p>
+"
+`;
+
+exports[`#loadArticles 2`] = `
+"<p>Wow, I am totally excited – day two, second article already!</p>
+"
+`;

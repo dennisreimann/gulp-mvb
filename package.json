@@ -26,7 +26,7 @@
     "blog"
   ],
   "dependencies": {
-    "glob": "^6.0.1",
+    "glob": "^6.0.4",
     "gulp-util": "^3.0.7",
     "markdown-it": "^8.4.0",
     "through2": "^2.0.0",
@@ -36,9 +36,10 @@
     "node": ">= 6.11.4"
   },
   "scripts": {
-    "test": "standard"
+    "test": "standard && jest"
   },
   "devDependencies": {
+    "jest": "^21.2.1",
     "standard": "^10.0.3"
   }
 }

@@ -73,7 +73,7 @@ const loadArticles = (globs, permalink, loaded) => {
   })
 }
 
-module.exports = (options) => {
+module.exports = options => {
   // ensure globs is an array
   if (!Array.isArray(options.glob)) options.glob = [options.glob]
   const globs = options.glob
