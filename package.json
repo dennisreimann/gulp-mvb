@@ -16,6 +16,11 @@
     "email": "mail@dennisreimann.de",
     "url": "https://dennisreimann.de/"
   },
+  "files": [
+    "index.js",
+    "mvb.js"
+  ],
+  "main": "index.js",
   "keywords": [
     "gulpplugin",
     "blog"
@@ -25,7 +30,6 @@
     "gulp-util": "^3.0.7",
     "markdown-it": "^8.4.0",
     "through2": "^2.0.0",
-    "util-extend": "^1.0.1",
     "yaml-front-matter": "^3.2.3"
   },
   "engines": {
