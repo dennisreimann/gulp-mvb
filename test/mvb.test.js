@@ -1,10 +1,10 @@
 /* globals expect, test */
-const path = require('path')
+const { join } = require('path')
 const MVB = require('../mvb')
 
 test('#loadArticles', () => {
   const options = {
-    glob: path.join(__dirname, 'fixtures', '*.md'),
+    glob: join(__dirname, 'fixtures', '*.md'),
     permalink: article => `/articles/${article.id}.html`
   }
   const mvb = MVB(options)

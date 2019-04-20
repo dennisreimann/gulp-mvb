@@ -1,6 +1,6 @@
-const fs = require('fs')
-const path = require('path')
 const Through = require('through2')
+const { readFileSync } = require('fs')
+const { basename, join } = require('path')
 const { PluginError } = require('gulp-util')
 
 const MVB = require('./mvb')
@@ -17,7 +17,7 @@ module.exports = options => {
   if (options.loaded && typeof (options.loaded) !== 'function') { err('Loaded must be a function') }
 
   // read template
-  const template = fs.readFileSync(options.template)
+  const template = readFileSync(options.template)
 
   const mvb = MVB(options)
 
@@ -25,10 +25,9 @@ module.exports = options => {
   const articles = mvb.articles.reverse()
 
   // map article filenames to its object for lookup in stream
-  const map = articles.reduce((mapped, article) => {
-    mapped[article.fileName] = article
-    return mapped
-  }, {})
+  const map = articles.reduce((result, article) =>
+    Object.assign(result, { [article.fileName]: article })
+  , {})
 
   // grouping
   const { grouping } = options
@@ -38,7 +37,7 @@ module.exports = options => {
 
   return Through.obj((file, unused, callback) => {
     // lookup article by its file name
-    const article = map[path.basename(file.path)]
+    const article = map[basename(file.path)]
 
     // assign articles data to the file object so that it will be
     // available in the template during rendering.
@@ -50,10 +49,10 @@ module.exports = options => {
 
     if (article) {
       // assign article data
-      file.data.mvb = Object.assign(file.data.mvb, { article: article })
+      file.data.mvb = Object.assign(file.data.mvb, { article })
 
       // set the file's path to the permalink
-      file.path = path.join(file.base, path.basename(article.permalink))
+      file.path = join(file.base, basename(article.permalink))
 
       // assign template contents to the file so that it can get rendered
       file.contents = template

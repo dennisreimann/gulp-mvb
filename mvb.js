@@ -1,5 +1,5 @@
-const fs = require('fs')
-const path = require('path')
+const { readFileSync } = require('fs')
+const { basename } = require('path')
 const glob = require('glob')
 const yamlFront = require('yaml-front-matter')
 
@@ -20,9 +20,9 @@ const findArticles = globs => {
 // loads an article by its file path and returns an object
 // with the rendered markdown and the article meta data.
 const loadArticle = (filePath, permalink, loaded) => {
-  const input = fs.readFileSync(filePath)
+  const input = readFileSync(filePath)
   const article = yamlFront.loadFront(input)
-  const fileName = path.basename(filePath)
+  const fileName = basename(filePath)
   const fileInfo = fileName.match(/(\d{4}-\d{2}-\d{2})-(.*)\./)
 
   // infer missing infos from filename
