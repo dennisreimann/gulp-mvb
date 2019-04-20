@@ -4,6 +4,7 @@ gulp-mvb is a [gulp](https://github.com/wearefractal/gulp) plugin for creating a
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Build Status](https://travis-ci.org/dennisreimann/gulp-mvb.svg?branch=master)](https://travis-ci.org/dennisreimann/gulp-mvb)
+[![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/gulp-mvb/badge.svg)](https://snyk.io/test/github/dennisreimann/gulp-mvb)
 [![npm](https://img.shields.io/npm/v/gulp-mvb.svg)](https://www.npmjs.com/package/gulp-mvb)
 [![npm](https://img.shields.io/npm/dw/gulp-mvb.svg)](https://www.npmjs.com/package/gulp-mvb)
 
