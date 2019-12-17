@@ -1,7 +1,7 @@
 const Through = require('through2')
+const PluginError = require('plugin-error')
 const { readFileSync } = require('fs')
 const { basename, join } = require('path')
-const { PluginError } = require('gulp-util')
 
 const MVB = require('./mvb')
 

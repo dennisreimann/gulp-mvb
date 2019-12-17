@@ -4,12 +4,11 @@
   "version": "0.7.1",
   "license": "MIT",
   "homepage": "https://dennisreimann.de",
+  "funding": "https://dennisreimann.de/donate.html",
+  "bugs": "https://github.com/dennisreimann/gulp-mvb/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dennisreimann/gulp-mvb.git"
-  },
-  "bugs": {
-    "url": "https://github.com/dennisreimann/gulp-mvb/issues"
   },
   "author": {
     "name": "Dennis Reimann",
@@ -29,12 +28,11 @@
     "node": ">= 10.15.3"
   },
   "scripts": {
-    "lint": "standard",
-    "test": "jest"
+    "test": "standard && jest"
   },
   "dependencies": {
     "glob": "7.1.6",
-    "gulp-util": "3.0.8",
+    "plugin-error": "1.0.1",
     "markdown-it": "10.0.0",
     "through2": "3.0.1",
     "yaml-front-matter": "4.0.0"
