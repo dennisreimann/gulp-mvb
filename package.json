@@ -35,10 +35,10 @@
     "plugin-error": "1.0.1",
     "markdown-it": "10.0.0",
     "through2": "3.0.1",
-    "yaml-front-matter": "4.0.0"
+    "yaml-front-matter": "4.1.0"
   },
   "devDependencies": {
-    "jest": "24.9.0",
-    "standard": "14.3.1"
+    "jest": "25.1.0",
+    "standard": "14.3.3"
   }
 }
