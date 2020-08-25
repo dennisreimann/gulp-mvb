@@ -25,7 +25,7 @@
     "blog"
   ],
   "engines": {
-    "node": ">= 10.15.3"
+    "node": ">= 12.18.3"
   },
   "scripts": {
     "test": "standard && jest"
@@ -33,12 +33,12 @@
   "dependencies": {
     "glob": "7.1.6",
     "plugin-error": "1.0.1",
-    "markdown-it": "10.0.0",
-    "through2": "3.0.1",
+    "markdown-it": "11.0.0",
+    "through2": "4.0.2",
     "yaml-front-matter": "4.1.0"
   },
   "devDependencies": {
-    "jest": "25.1.0",
-    "standard": "14.3.3"
+    "jest": "26.4.2",
+    "standard": "14.3.4"
   }
 }
