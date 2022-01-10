@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "glob": "7.2.0",
-    "markdown-it": "12.2.0",
+    "markdown-it": "12.3.2",
     "plugin-error": "1.0.1",
     "through2": "4.0.2",
     "yaml-front-matter": "4.1.1"
