@@ -2,7 +2,7 @@
 
 exports[`#loadArticles 1`] = `
 "<p>Hello everyone, I’m starting a new blog!</p>
-<div id=\\"more\\"></div>
+<div id=\"more\"></div>
 <p>This is the first article.</p>
 "
 `;

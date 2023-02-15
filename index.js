@@ -43,8 +43,8 @@ module.exports = options => {
     // available in the template during rendering.
     if (!file.data) { file.data = {} }
     file.data.mvb = {
-      articles: articles,
-      groupedArticles: groupedArticles
+      articles,
+      groupedArticles
     }
 
     if (article) {
