@@ -91,6 +91,28 @@ module.exports = options => {
     md.set({ highlight })
   }
 
+  // plugins
+  (options.plugins || []).forEach(plugin => {
+    if (!Array.isArray(plugin)) {
+      plugin = [plugin]
+    }
+
+    if (typeof plugin[0] === 'string') {
+      plugin[0] = require(plugin[0])
+    }
+
+    md.use(...plugin)
+  });
+
+  // enable/disable rules
+  (options.enable || []).forEach(rule => {
+    md.enable(...Array.isArray(rule) ? rule : [rule])
+  });
+
+  (options.disable || []).forEach(rule => {
+    md.disable(...Array.isArray(rule) ? rule : [rule])
+  })
+
   const articles = loadArticles(globs, permalink, loaded)
 
   return {

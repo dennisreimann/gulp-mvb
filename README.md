@@ -71,6 +71,11 @@ const mvbConf = {
   glob: paths.articles,
   // the template for an article page
   template: paths.articleTemplate,
+  // optionally define custom markdown-it plugins
+  plugins: [
+    'markdown-it-mark',
+    ['markdown-it-anchor', { permalink: false }]
+  ],
   // callback function for generating an article permalink.
   // see docs below for info on the article properties.
   permalink(article) {
