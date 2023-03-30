@@ -1,6 +1,6 @@
 const { readFileSync } = require('fs')
 const { basename } = require('path')
-const glob = require('glob')
+const { globSync } = require('glob')
 const yamlFront = require('yaml-front-matter')
 
 const md = require('markdown-it')({
@@ -13,7 +13,7 @@ const md = require('markdown-it')({
 // and returns an array with the article file paths.
 const findArticles = globs => {
   return globs.reduce((list, pattern) => {
-    return list.concat(glob.sync(pattern))
+    return list.concat(globSync(pattern).sort())
   }, [])
 }
 
