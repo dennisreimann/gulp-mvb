@@ -1,6 +1,6 @@
 # gulp-mvb
 
-gulp-mvb is a [gulp](https://github.com/wearefractal/gulp) plugin for creating a *minimum viable blog*.
+gulp-mvb is a [gulp](https://github.com/wearefractal/gulp) plugin for creating a _minimum viable blog_.
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Build Status](https://travis-ci.org/dennisreimann/gulp-mvb.svg?branch=master)](https://travis-ci.org/dennisreimann/gulp-mvb)
@@ -28,7 +28,7 @@ To keep it dead simple, here are the rules.
 Articles...
 
 - are written in Markdown
-- have this filename pattern: `YYYY-MM-DD-ARTICLE_NAME.md`
+- have this filename pattern: `YYYY-MM-DD-ARTICLE_NAME.md` (the `YYYY-MM-DD-` part is optional)
 - meta data is defined via YAML Front Matter
 
 ## Usage
@@ -127,7 +127,7 @@ See all of this in a broader context in [my websites gulpfile](https://github.co
 The article object has the following properties, which can be used in the template and permalink function:
 
 - `id`: In case this is not set via front matter, it will be inferred from the articles file name (second part after date)
-- `date`: In case this is not set via front matter, it will be inferred from the articles file name
+- `date`: In case this is not set via front matter, it will be inferred from the articles file name (optional `YYYY-MM-DD-` part)
 - `permalink`: Gets generated via the permalink function
 - `content`: The rendered content (HTML)
 - `fileName`: You might want to use this in the permalink callback function

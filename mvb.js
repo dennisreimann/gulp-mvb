@@ -23,11 +23,11 @@ const loadArticle = (filePath, permalink, loaded) => {
   const input = readFileSync(filePath)
   const article = yamlFront.loadFront(input)
   const fileName = basename(filePath)
-  const fileInfo = fileName.match(/(\d{4}-\d{2}-\d{2})-(.*)\./)
+  const fileInfo = fileName.match(/(?:(\d{4}-\d{2}-\d{2})-)?(.*)\./)
 
   // infer missing infos from filename
   if (!article.id) article.id = fileInfo[2]
-  if (!article.date) article.date = new Date(fileInfo[1])
+  if (!article.date && fileInfo[1]) article.date = new Date(fileInfo[1])
 
   article.fileName = fileName
   article.permalink = permalink(article)
@@ -43,7 +43,7 @@ const loadArticle = (filePath, permalink, loaded) => {
     if (!article.description) {
       article.description = desc.input
         .substring(0, desc.index)
-        .replace(/(<([^>]+)>)/ig, '')
+        .replace(/(<([^>]+)>)/gi, '')
         .trim()
     }
   }
@@ -87,12 +87,12 @@ module.exports = options => {
   // function to highlight code blocks
   const { highlight } = options
 
-  if (typeof (highlight) === 'function') {
+  if (typeof highlight === 'function') {
     md.set({ highlight })
   }
 
   // plugins
-  (options.plugins || []).forEach(plugin => {
+  ;(options.plugins || []).forEach(plugin => {
     if (!Array.isArray(plugin)) {
       plugin = [plugin]
     }
@@ -102,15 +102,14 @@ module.exports = options => {
     }
 
     md.use(...plugin)
-  });
+  })
 
   // enable/disable rules
-  (options.enable || []).forEach(rule => {
-    md.enable(...Array.isArray(rule) ? rule : [rule])
-  });
-
-  (options.disable || []).forEach(rule => {
-    md.disable(...Array.isArray(rule) ? rule : [rule])
+  ;(options.enable || []).forEach(rule => {
+    md.enable(...(Array.isArray(rule) ? rule : [rule]))
+  })
+  ;(options.disable || []).forEach(rule => {
+    md.disable(...(Array.isArray(rule) ? rule : [rule]))
   })
 
   const articles = loadArticles(globs, permalink, loaded)

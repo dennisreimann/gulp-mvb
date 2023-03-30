@@ -2,12 +2,17 @@
 
 exports[`#loadArticles 1`] = `
 "<p>Hello everyone, I’m starting a new blog!</p>
-<div id=\"more\"></div>
+<div id="more"></div>
 <p>This is the first article.</p>
 "
 `;
 
 exports[`#loadArticles 2`] = `
 "<p>Wow, I am totally excited – day two, second article already!</p>
+"
+`;
+
+exports[`#loadArticles 3`] = `
+"<p>It’s as simple as that.</p>
 "
 `;
