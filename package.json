@@ -30,7 +30,7 @@
     "test": "standard && jest"
   },
   "dependencies": {
-    "glob": "10.3.12",
+    "glob": "11.0.3",
     "markdown-it": "14.1.0",
     "plugin-error": "2.0.1",
     "through2": "4.0.2",
