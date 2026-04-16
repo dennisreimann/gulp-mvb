@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`#loadArticles 1`] = `
 "<p>Hello everyone, I’m starting a new blog!</p>
